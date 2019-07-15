@@ -34,3 +34,30 @@ will fill our browser.
 To terminate the server, just press `CTRL+c`.
 
 And this is basically all there is to it.
+
+
+## Docker
+
+The `Dockerfile` is used to build a *ready-to-use* image. It contains all
+available recordings. You just need to choose one and then launch it.
+If you don't want to build yourself image, you could directly pull
+`shihta/redfish-recordings`.
+
+### Environment variables
+
+* BIND - The IP you want to bind, default is `0.0.0.0`
+* PORT - The port you want to expose, default is `8000`
+* USER - Username for authentication, default is `admin`
+* PASS - Password for authentication, default is `passadmin`
+* SSL - Set it to `TRUE` for *HTTPS*, otherwise it will provide *HTTP* service.
+  Default is `TRUE`
+* RECORDING - Which recording will be serve, default is `lenovo-sr650`
+
+### Integrate with yourself recording
+
+It's easy to integrate with your local recording. You just need to put your
+recording folder on `/app` and then change `RECORDING` to the folder name.
+e.g.
+```
+docker run -v $PWD/newtype:/app/newtype -e RECORDING=newtype shihta/redfish-recordings
+```
